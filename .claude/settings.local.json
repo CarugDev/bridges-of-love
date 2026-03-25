@@ -6,7 +6,8 @@
       "Bash(xargs grep:*)",
       "Bash(ls F:/Bridgesoflove/bridges-of-love/next.config*)",
       "Bash(tasklist)",
-      "Bash(find F:/Bridgesoflove/bridges-of-love/.next -name *.lock -o -name build-lock*)"
+      "Bash(find F:/Bridgesoflove/bridges-of-love/.next -name *.lock -o -name build-lock*)",
+      "Bash(node:*)"
     ]
   }
 }

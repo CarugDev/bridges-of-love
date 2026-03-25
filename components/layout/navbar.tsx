@@ -1,11 +1,12 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import Link from "next/link"
-import { useUser, UserButton } from "@clerk/nextjs"
-import { MenuIcon, HeartHandshakeIcon } from "lucide-react"
+import { motion } from "framer-motion"
+import { Menu } from "lucide-react"
+import { useUser, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
 
-import { Button } from "@/components/ui/button"
 import {
   Sheet,
   SheetContent,
@@ -14,105 +15,124 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet"
-import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { label: "How It Works", href: "/#how-it-works" },
-  { label: "Caregivers", href: "/caregivers" },
-  { label: "Pricing", href: "/#pricing" },
+  { label: "How it works", href: "/#how-it-works" },
+  { label: "Why us", href: "/#why-us" },
+  { label: "For Families", href: "/families" },
+  { label: "For Caregivers", href: "/caregivers" },
 ]
 
 export function Navbar() {
-  const [scrolled, setScrolled] = React.useState(false)
   const { isSignedIn } = useUser()
+  const [scrolled, setScrolled] = React.useState(false)
 
   React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16)
+    const onScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-white/95 backdrop-blur-md border-b border-border shadow-sm"
-          : "bg-transparent"
-      )}
+    <motion.header
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="sticky top-0 left-0 right-0 z-50 bg-white border-b border-[#E5E7EB]"
+      style={{
+        boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.08)" : "none",
+        transition: "box-shadow 0.3s ease",
+      }}
     >
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <nav className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-semibold text-brand-navy transition-opacity hover:opacity-80"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <HeartHandshakeIcon className="size-6 text-brand-rose" />
-          <span className="text-base tracking-tight">
-            Bridges <span className="text-brand-rose">of Love</span>
-          </span>
-        </Link>
+          <Link href="/">
+            <Image
+              src="/logo.png"
+              alt="Bridges of Love"
+              height={48}
+              width={200}
+              style={{ height: "48px", width: "auto" }}
+              priority
+            />
+          </Link>
+        </motion.div>
 
         {/* Desktop nav links */}
-        <ul className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
+        <ul className="hidden items-center gap-8 md:flex">
+          {navLinks.map((link, i) => (
+            <motion.li
+              key={link.href}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
+            >
               <Link
                 href={link.href}
-                className={cn(
-                  "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
-                  scrolled
-                    ? "text-foreground hover:text-brand-rose"
-                    : "text-foreground/80 hover:text-foreground"
-                )}
+                className="text-[#374151] text-[15px] font-medium no-underline transition-colors duration-200 hover:text-[#1B8FC4]"
               >
                 {link.label}
               </Link>
-            </li>
+            </motion.li>
           ))}
         </ul>
 
         {/* Desktop auth */}
-        <div className="hidden items-center gap-2 md:flex">
+        <motion.div
+          className="hidden items-center gap-3 md:flex"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.6 }}
+        >
           {isSignedIn ? (
-            <UserButton  />
+            <UserButton />
           ) : (
             <>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/sign-in">Sign In</Link>
-              </Button>
-              <Button size="sm" asChild>
-                <Link href="/sign-up">Get Started</Link>
-              </Button>
+              <SignInButton mode="modal">
+                <button className="text-[#111827] text-sm font-semibold transition-colors duration-200 hover:text-[#1B8FC4]">
+                  Sign In
+                </button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="bg-[#1B8FC4] text-white rounded-lg px-5 py-2 text-sm font-medium transition-colors duration-200 hover:bg-[#1570A6]"
+                >
+                  Get Started
+                </motion.button>
+              </SignUpButton>
             </>
           )}
-        </div>
+        </motion.div>
 
         {/* Mobile menu trigger */}
         <div className="flex items-center gap-2 md:hidden">
-          {isSignedIn && <UserButton  />}
+          {isSignedIn && <UserButton />}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon-sm" aria-label="Open menu">
-                <MenuIcon />
-              </Button>
+              <button
+                className="p-2 text-[#374151] transition-colors hover:text-[#1B8FC4]"
+                aria-label="Open menu"
+              >
+                <Menu size={24} />
+              </button>
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
               <SheetHeader>
-                <SheetTitle className="flex items-center gap-2">
-                  <HeartHandshakeIcon className="size-5 text-brand-rose" />
-                  <span>
-                    Bridges <span className="text-brand-rose">of Love</span>
-                  </span>
-                </SheetTitle>
+                <SheetTitle className="sr-only">Navigation menu</SheetTitle>
               </SheetHeader>
-
-              <nav className="mt-4 flex flex-col gap-1 px-4">
+              <nav className="mt-6 flex flex-col gap-1 px-1">
                 {navLinks.map((link) => (
                   <SheetClose asChild key={link.href}>
                     <Link
                       href={link.href}
-                      className="rounded-md px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-brand-rose"
+                      className="rounded-md px-3 py-3 text-[15px] font-medium text-[#374151] transition-colors duration-200 hover:text-[#1B8FC4]"
                     >
                       {link.label}
                     </Link>
@@ -121,23 +141,23 @@ export function Navbar() {
               </nav>
 
               {!isSignedIn && (
-                <div className="mt-auto flex flex-col gap-2 px-4 pb-4">
-                  <SheetClose asChild>
-                    <Button variant="outline" className="w-full" asChild>
-                      <Link href="/sign-in">Sign In</Link>
-                    </Button>
-                  </SheetClose>
-                  <SheetClose asChild>
-                    <Button className="w-full" asChild>
-                      <Link href="/sign-up">Get Started Free</Link>
-                    </Button>
-                  </SheetClose>
+                <div className="mt-6 flex flex-col gap-3 px-4">
+                  <SignInButton mode="modal">
+                    <button className="w-full text-left text-[#111827] text-sm font-semibold py-2 transition-colors hover:text-[#1B8FC4]">
+                      Sign In
+                    </button>
+                  </SignInButton>
+                  <SignUpButton mode="modal">
+                    <button className="w-full bg-[#1B8FC4] text-white rounded-lg px-5 py-2 text-sm font-medium transition-colors duration-200 hover:bg-[#1570A6]">
+                      Get Started
+                    </button>
+                  </SignUpButton>
                 </div>
               )}
             </SheetContent>
           </Sheet>
         </div>
       </nav>
-    </header>
+    </motion.header>
   )
 }
