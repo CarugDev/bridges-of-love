@@ -1,13 +1,72 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../lib/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String   @unique
+  role      Role     @default(FAMILY)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  familyProfile    FamilyProfile?
+  caregiverProfile CaregiverProfile?
+}
+
+enum Role {
+  FAMILY
+  CAREGIVER
+  ADMIN
+}
+
+model FamilyProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id])
+  familyName  String
+  state       String?
+  city        String?
+  description String?
+  children    Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CaregiverProfile {
+  id        String        @id @default(cuid())
+  userId    String        @unique
+  user      User          @relation(fields: [userId], references: [id])
+  fullName  String
+  country   String?
+  languages String[]
+  bio       String?
+  photoUrl  String?
+  status    ProfileStatus @default(PENDING)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  certificates Certificate[]
+}
+
+enum ProfileStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Certificate {
+  id          String           @id @default(cuid())
+  caregiverId String
+  caregiver   CaregiverProfile @relation(fields: [caregiverId], references: [id])
+  name        String
+  issuedBy    String?
+  docUrl      String?
+  verified    Boolean          @default(false)
+  createdAt   DateTime         @default(now())
 }

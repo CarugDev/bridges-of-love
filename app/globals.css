@@ -46,6 +46,12 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Brand tokens — available as bg-brand-rose, text-brand-navy, etc. */
+  --color-brand-rose: var(--brand-rose);
+  --color-brand-rose-light: var(--brand-rose-light);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-cream: var(--brand-cream);
 }
 
 :root {
@@ -55,7 +61,8 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  /* Brand rose as primary */
+  --primary: oklch(0.62 0.20 12);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -66,7 +73,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: oklch(0.62 0.20 12);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -75,12 +82,18 @@
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary: oklch(0.62 0.20 12);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-ring: oklch(0.62 0.20 12);
+
+  /* Brand palette */
+  --brand-rose: oklch(0.62 0.20 12);
+  --brand-rose-light: oklch(0.94 0.05 12);
+  --brand-navy: oklch(0.23 0.06 245);
+  --brand-cream: oklch(0.98 0.008 60);
 }
 
 .dark {
