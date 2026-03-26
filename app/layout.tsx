@@ -1,13 +1,18 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Playfair_Display, Poppins } from "next/font/google"
 import { ClerkProvider } from "@clerk/nextjs"
 import "./globals.css"
 
-// variable: "--font-sans" exposes the font as a CSS custom property
-// so Tailwind v4's `font-sans` utility (which maps to var(--font-sans)) works correctly
-const inter = Inter({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-playfair",
+  weight: ["400", "600", "700", "800"],
+})
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  weight: ["300", "400", "500", "600", "700"],
 })
 
 export const metadata: Metadata = {
@@ -23,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className={inter.variable}>
+      <html lang="en" className={`${playfair.variable} ${poppins.variable}`}>
         <body>{children}</body>
       </html>
     </ClerkProvider>

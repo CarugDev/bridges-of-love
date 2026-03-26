@@ -135,9 +135,19 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background: linear-gradient(180deg, #F5E6D0 0%, #EDD9B8 20%, #F0E4D0 50%, #F8F0E8 80%, #FFFFFF 100%);
+    min-height: 100vh;
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
   }
+}
+
+* {
+  font-family: var(--font-poppins);
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair);
 }
