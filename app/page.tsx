@@ -5,6 +5,8 @@ import { HowItWorks } from "@/components/sections/how-it-works"
 import { WhyUs } from "@/components/sections/why-us"
 import { ForWho } from "@/components/sections/for-who"
 import { Testimonials } from "@/components/sections/testimonials"
+import { Pricing } from "@/components/sections/pricing"
+import { FAQ } from "@/components/sections/faq"
 import { Footer } from "@/components/layout/footer"
 
 const Divider = () => (
@@ -40,8 +42,14 @@ export default function Home() {
         <div id="testimonials">
           <Testimonials />
         </div>
-        {/* Sections added on Days 4 & 5: Features,
-            Certifications, Pricing, FAQ */}
+        <Divider />
+        <div id="pricing">
+          <Pricing />
+        </div>
+        <Divider />
+        <div id="faq">
+          <FAQ />
+        </div>
       </main>
       <Footer />
     </>
