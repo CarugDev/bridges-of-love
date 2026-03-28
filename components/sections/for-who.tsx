@@ -101,15 +101,16 @@ export function ForWho() {
 
             {/* CTA */}
             <div className="mt-8">
-              <button
-                className="rounded-lg px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              <Link
+                href="/for-families"
+                className="inline-block rounded-lg px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                 style={{
                   backgroundColor: "#1B8FC4",
                   fontFamily: "var(--font-poppins)",
                 }}
               >
                 Find a Caregiver
-              </button>
+              </Link>
             </div>
           </motion.div>
 
