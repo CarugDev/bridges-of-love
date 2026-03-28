@@ -7,7 +7,7 @@ import { ForWho } from "@/components/sections/for-who"
 import { Testimonials } from "@/components/sections/testimonials"
 import { Pricing } from "@/components/sections/pricing"
 import { FAQ } from "@/components/sections/faq"
-import { Footer } from "@/components/layout/footer"
+import { Footer, FooterCTABanner } from "@/components/layout/footer"
 
 const Divider = () => (
   <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(196,149,106,0.2), transparent)" }} />
@@ -51,6 +51,7 @@ export default function Home() {
           <FAQ />
         </div>
       </main>
+      <FooterCTABanner />
       <Footer />
     </>
   )

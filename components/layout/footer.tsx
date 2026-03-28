@@ -65,54 +65,57 @@ function ColumnHeading({ children }: { children: React.ReactNode }) {
   )
 }
 
+export function FooterCTABanner() {
+  return (
+    <motion.div
+      className="w-full"
+      style={{
+        background: "linear-gradient(135deg, #1B8FC4 0%, #1570A6 100%)",
+        padding: "48px 24px",
+      }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-6 text-center lg:flex-row lg:justify-between lg:text-left">
+        <div>
+          <h2
+            className="text-[28px] font-bold text-white"
+            style={{ fontFamily: "var(--font-playfair)" }}
+          >
+            Ready to find your perfect caregiver?
+          </h2>
+          <p
+            className="mt-2 text-[14px]"
+            style={{
+              fontFamily: "var(--font-poppins)",
+              color: "rgba(255,255,255,0.85)",
+            }}
+          >
+            Join families across the United States who trust Bridges of Love.
+          </p>
+        </div>
+        <Link
+          href="/sign-up"
+          className="shrink-0 rounded-lg px-8 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
+          style={{
+            backgroundColor: "white",
+            color: "#1B8FC4",
+            fontFamily: "var(--font-poppins)",
+            fontWeight: 600,
+          }}
+        >
+          Get Started Today
+        </Link>
+      </div>
+    </motion.div>
+  )
+}
+
 export function Footer() {
   return (
     <footer>
-      {/* CTA Banner */}
-      <motion.div
-        className="w-full"
-        style={{
-          background: "linear-gradient(135deg, #1B8FC4 0%, #1570A6 100%)",
-          padding: "48px 24px",
-        }}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-6 text-center lg:flex-row lg:justify-between lg:text-left">
-          <div>
-            <h2
-              className="text-[28px] font-bold text-white"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              Ready to find your perfect caregiver?
-            </h2>
-            <p
-              className="mt-2 text-[14px]"
-              style={{
-                fontFamily: "var(--font-poppins)",
-                color: "rgba(255,255,255,0.85)",
-              }}
-            >
-              Join families across the United States who trust Bridges of Love.
-            </p>
-          </div>
-          <Link
-            href="/sign-up"
-            className="shrink-0 rounded-lg px-8 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
-            style={{
-              backgroundColor: "white",
-              color: "#1B8FC4",
-              fontFamily: "var(--font-poppins)",
-              fontWeight: 600,
-            }}
-          >
-            Get Started Today
-          </Link>
-        </div>
-      </motion.div>
-
       {/* Main footer body */}
       <motion.div
         style={{ backgroundColor: "#1A2332" }}

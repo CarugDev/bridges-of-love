@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { motion } from "framer-motion"
 import { BadgeCheck, Globe, CheckCircle2 } from "lucide-react"
 
@@ -165,8 +166,9 @@ export function ForWho() {
 
             {/* CTA */}
             <div className="mt-8">
-              <button
-                className="group rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-200 hover:text-white"
+              <Link
+                href="/for-caregivers"
+                className="group inline-block rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-200 hover:text-white"
                 style={{
                   border: "1.5px solid #C4956A",
                   color: "#C4956A",
@@ -174,18 +176,18 @@ export function ForWho() {
                   backgroundColor: "transparent",
                 }}
                 onMouseEnter={(e) => {
-                  ;(e.currentTarget as HTMLButtonElement).style.backgroundColor =
+                  ;(e.currentTarget as HTMLAnchorElement).style.backgroundColor =
                     "#C4956A"
-                  ;(e.currentTarget as HTMLButtonElement).style.color = "white"
+                  ;(e.currentTarget as HTMLAnchorElement).style.color = "white"
                 }}
                 onMouseLeave={(e) => {
-                  ;(e.currentTarget as HTMLButtonElement).style.backgroundColor =
+                  ;(e.currentTarget as HTMLAnchorElement).style.backgroundColor =
                     "transparent"
-                  ;(e.currentTarget as HTMLButtonElement).style.color = "#C4956A"
+                  ;(e.currentTarget as HTMLAnchorElement).style.color = "#C4956A"
                 }}
               >
                 Apply as a Caregiver
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>

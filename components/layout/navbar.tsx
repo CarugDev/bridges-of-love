@@ -20,7 +20,7 @@ const navLinks = [
   { label: "How it works", href: "/#how-it-works" },
   { label: "Why us", href: "/#why-us" },
   { label: "For Families", href: "#for-families" },
-  { label: "For Caregivers", href: "#for-caregivers" },
+  { label: "For Caregivers", href: "/for-caregivers" },
 ]
 
 export function Navbar() {
